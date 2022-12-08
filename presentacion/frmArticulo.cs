@@ -31,8 +31,21 @@ namespace presentacion
         {
             try
             {
+                cargarArticulos();
+            }
+            catch (Exception ex)
+            {
+
+               MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void cargarArticulos()
+        {
+            try
+            {
                 listaArticulo = negocioArticulo.mostrarArticulos();
-                dgvArticulos.DataSource = listaArticulo ;
+                dgvArticulos.DataSource = listaArticulo;
                 dgvArticulos.Columns["id"].Visible = false;
                 dgvArticulos.Columns["urlimagen"].Visible = false;
                 dgvArticulos.Columns["Marca"].Visible = false;
@@ -46,7 +59,6 @@ namespace presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private void cargarImagen(string url)
         {
             try
@@ -64,6 +76,13 @@ namespace presentacion
         {
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             cargarImagen(seleccionado.UrlImagen);
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo frmAltaArticulo = new frmAltaArticulo();
+            frmAltaArticulo.ShowDialog();
+            cargarArticulos();
         }
     }
 }

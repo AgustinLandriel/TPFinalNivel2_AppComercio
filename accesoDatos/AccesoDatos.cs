@@ -36,6 +36,11 @@ namespace accesoDatos
             comando.CommandType = CommandType.Text;
             comando.CommandText = consulta;
         }
+
+        public void setParametros (string variable,object valor)
+        {
+            comando.Parameters.AddWithValue(variable, valor);
+        }
         public void EjecutarLectura()
         {
             comando.Connection = conexion; //Establesco conexion del comando a la BD.
@@ -49,6 +54,22 @@ namespace accesoDatos
             {
 
                 throw;
+            }
+        }
+
+        public void EjecutarAccion()
+        {
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery(); //Me ejecuta la accion,insert,update,delete,etc
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
 
