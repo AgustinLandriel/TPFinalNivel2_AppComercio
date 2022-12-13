@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using accesoDatos;
 
 namespace presentacion
 {
@@ -19,7 +20,7 @@ namespace presentacion
         //Articulo articulo = null;
         private List<Articulo> listaArticulo = new List<Articulo>();
         private NegocioArticulo negocioArticulo = new NegocioArticulo();
-
+        private AccesoDatos datos = new AccesoDatos();
         //Constructores
         public frmArticulo()
         {
@@ -32,6 +33,10 @@ namespace presentacion
             try
             {
                 cargarArticulos();
+                cboxCampo.Items.Add("Precio");
+                cboxCampo.Items.Add("Marca");
+                cboxCampo.Items.Add("Nombre");
+
             }
             catch (Exception ex)
             {
@@ -46,10 +51,8 @@ namespace presentacion
             {
                 listaArticulo = negocioArticulo.mostrarArticulos();
                 dgvArticulos.DataSource = listaArticulo;
-                dgvArticulos.Columns["id"].Visible = false;
-                dgvArticulos.Columns["urlimagen"].Visible = false;
-                dgvArticulos.Columns["Marca"].Visible = false;
-                dgvArticulos.Columns["Categoria"].Visible = false;
+                ocultarColumnas();
+                
 
                 PictureBoxArticulo.Load(listaArticulo[0].UrlImagen);
             }
@@ -71,11 +74,19 @@ namespace presentacion
                 PictureBoxArticulo.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
             }
         }
-
+        private void ocultarColumnas()
+        {
+            dgvArticulos.Columns["id"].Visible = false;
+            dgvArticulos.Columns["urlimagen"].Visible = false;
+        }
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.UrlImagen);
+            //Si la grilla tiene datos, selecciona el articulo.
+            if (dgvArticulos.DataSource != null)
+            {
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.UrlImagen);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -83,6 +94,204 @@ namespace presentacion
             frmAltaArticulo frmAltaArticulo = new frmAltaArticulo();
             frmAltaArticulo.ShowDialog();
             cargarArticulos();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo frmModificarArticulo = new frmAltaArticulo(seleccionado);
+            frmModificarArticulo.ShowDialog();
+            cargarArticulos();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("Estas seguro de eliminar este producto?","Eliminando producto",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+            
+            if(resultado == DialogResult.Yes)
+            {
+                try
+                {
+                    Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    negocioArticulo.EliminarArticulo(seleccionado.Id);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    
+                }
+            }
+
+            cargarArticulos();
+        }
+
+        private void textBuscar_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada = new List<Articulo>();
+
+            try
+            {
+                string filtro = textBuscar.Text;
+
+                //Funcion lambda que me filtra por nombre y marca. La guardo en una lista nueva filtrada.
+                listaFiltrada = listaArticulo.FindAll(x => x.Nombre.ToLower().Contains(filtro.ToLower()) || x.Marca.NombreMarca.ToLower().Contains(filtro.ToLower()));
+
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void cboxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cboxCampo.SelectedItem == "Precio")
+            {
+                cboxCriterio.Items.Clear();
+                cboxCriterio.Items.Add("Mayor a");
+                cboxCriterio.Items.Add("Menor a");
+                cboxCriterio.Items.Add("Igual a");
+
+            } else if(cboxCampo.SelectedItem == "Marca")
+            {
+                cboxCriterio.Items.Clear();
+                cboxCriterio.Items.Add("Coincide con");
+                cboxCriterio.Items.Add("Empieza con");
+                cboxCriterio.Items.Add("Termina con");
+            }
+            else
+            {
+                cboxCriterio.Items.Clear();
+                cboxCriterio.Items.Add("Coincide con");
+                cboxCriterio.Items.Add("Empieza con");
+                cboxCriterio.Items.Add("Termina con");
+            }
+        }
+
+        private void textBuscarFiltro_Click(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada = new List<Articulo>();
+
+            try
+            {
+                string campo = cboxCampo.SelectedItem.ToString();
+                string criterio = cboxCriterio.SelectedItem.ToString();
+                string filtro = textFiltroAvanzado.Text;
+
+                listaFiltrada = BusquedaFiltrada(campo, criterio, filtro);
+
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+           
+        }
+
+        private List<Articulo> BusquedaFiltrada(string campo, string criterio, string filtro)
+        {
+            List<Articulo> listaFiltrada = new List<Articulo>();
+
+            try
+            {
+                string consulta = @"select a.id,IdMarca,IdCategoria,a.codigo,a.nombre,a.descripcion,a.imagenurl,c.Descripcion as [Categoria],
+                                m.Descripcion as [Marca],a.precio
+                                from ARTICULOS as a
+                                inner join CATEGORIAS as c
+                                on(IdCategoria = c.Id)
+                                inner join MARCAS as m
+                                on(IdMarca = m.Id) WHERE ";
+
+                //Si seleccionan este campo..
+                if(campo == "Precio")
+                {
+                    //Selecciono el criterio 
+                    switch (criterio)
+                    {
+                        case "Igual a":
+                            consulta += "a.precio = " + filtro;break;
+                        case "Mayor a":
+                            consulta += "a.precio > " + filtro;break;
+                        default://Menor a
+                            consulta += "a.precio < " + filtro; break;
+                    }
+                } else if (campo == "Marca")
+                {
+                    switch (criterio)
+                    {
+                        case "Coincide con":
+                            consulta += "m.descripcion LIKE '%" + filtro + "%'"; break; //Like '%filtro%'
+                        case "Empieza con":
+                            consulta += "m.descripcion  LIKE'" + filtro + "%'";  break; //Like 'filtro%'
+                        default: //Termina con
+                            consulta += "m.descripcion  LIKE'%" + filtro + "'"; break; //like '%filtro'
+                    }
+                }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Coincide con":
+                            consulta += "a.nombre  LIKE '%" + filtro + "%'"; break; //Like '%filtro%'
+                        case "Empieza con":
+                            consulta += "a.nombre  LIKE'" + filtro + "%'"; break; //Like 'filtro%'
+                        default: //Termina con
+                            consulta += "a.nombre  LIKE'%" + filtro + "'"; break; //like '%filtro'
+                    }
+                }
+
+                // --------Ejecuto la consulta ya filtrada  ------
+
+                datos.setQuery(consulta);
+                datos.EjecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["id"];
+                    aux.Codigo = (string)datos.Lector["codigo"];
+                    aux.Nombre = (string)datos.Lector["nombre"];
+                    aux.Descripcion = (string)datos.Lector["descripcion"];
+                    aux.Marca = new Marca();
+                    aux.Marca.IdMarca = (int)datos.Lector["IdMarca"];
+                    aux.Marca.NombreMarca = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.NombreCategoria = (string)datos.Lector["Categoria"];
+                    if (!(datos.Lector["imagenurl"] is DBNull))
+                        aux.UrlImagen = (string)datos.Lector["imagenurl"];
+                    aux.Precio = (decimal)datos.Lector["precio"];
+
+                    listaFiltrada.Add(aux);
+                }
+
+                return listaFiltrada;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmVerDetalle frmVerDetalle = new frmVerDetalle(seleccionado);
+            frmVerDetalle.ShowDialog();
         }
     }
 }

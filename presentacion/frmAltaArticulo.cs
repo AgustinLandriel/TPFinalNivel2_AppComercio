@@ -27,7 +27,13 @@ namespace presentacion
         {
             InitializeComponent();
         }
-
+        public frmAltaArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar articulo";
+            lblTitleAlta.Text = "Modificar artículo";
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -35,11 +41,11 @@ namespace presentacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //Si no existe el articulo, lo creo.
-            if (articulo == null)
-                articulo = new Articulo();
             try
             {
+                //Si no existe el articulo, lo creo.
+                if (articulo == null)
+                    articulo = new Articulo();
 
                 articulo.Codigo = textCodigo.Text;
                 articulo.Nombre = textNombre.Text;
@@ -47,16 +53,25 @@ namespace presentacion
                 articulo.UrlImagen = textUrl.Text;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
-                articulo.Precio = decimal.Parse(cboPrecio.Text);
+                articulo.Precio = decimal.Parse(textPrecio.Text);
 
-                negocio.AgregarArticulos(articulo);
+                if (articulo.Id != 0)
+                {
+                   negocio.ModificarArticulo(articulo);
+                    MessageBox.Show(articulo.Nombre + " ha sido modificado correctamente.");
+                }
+                else
+                {
+                   negocio.AgregarArticulos(articulo);
+                   MessageBox.Show(articulo.Nombre + " ha sido agregado correctamente.");
+                }
 
                 Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -64,8 +79,10 @@ namespace presentacion
         {
             try
             {
+                
                 cboMarca.DataSource = negocio.mostrarMarcas();
                 cboCategoria.DataSource = negocio.mostrarCategorias();
+               
 
                 //Value = key | display = valor
                 cboMarca.ValueMember = "IdMarca";
@@ -74,6 +91,18 @@ namespace presentacion
                 cboCategoria.ValueMember = "IdCategoria";
                 cboCategoria.DisplayMember = "NombreCategoria";
 
+                //Sobreescribo los datos del articulo si se modifica
+                if (articulo != null)
+                {
+                    textCodigo.Text = articulo.Codigo;
+                    textNombre.Text = articulo.Nombre;
+                    textDescripcion.Text = articulo.Descripcion;
+                    textUrl.Text = articulo.UrlImagen;
+                    cargarImagen(textUrl.Text);
+                    textPrecio.Text = articulo.Precio.ToString();
+                    cboCategoria.SelectedValue = articulo.Categoria.IdCategoria;
+                    cboMarca.SelectedValue = articulo.Marca.IdMarca;
+                }
 
             }
             catch (Exception ex)
@@ -89,6 +118,18 @@ namespace presentacion
             try
             {
                 pboxArticulo.Load(textUrl.Text);
+            }
+            catch (Exception)
+            {
+
+                pboxArticulo.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
+            }
+        }
+        private void cargarImagen(string url)
+        {
+            try
+            {
+                pboxArticulo.Load(url);
             }
             catch (Exception)
             {

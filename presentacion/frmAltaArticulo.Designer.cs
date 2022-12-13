@@ -29,7 +29,7 @@ namespace presentacion
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitleAlta = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.lblUrlImagen = new System.Windows.Forms.Label();
@@ -43,24 +43,24 @@ namespace presentacion
             this.textUrl = new System.Windows.Forms.TextBox();
             this.textDescripcion = new System.Windows.Forms.TextBox();
             this.textNombre = new System.Windows.Forms.TextBox();
-            this.cboPrecio = new System.Windows.Forms.TextBox();
+            this.textPrecio = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.pboxArticulo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pboxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitleAlta
             // 
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Lucida Sans Unicode", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(179, 21);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
-            this.label1.Size = new System.Drawing.Size(292, 66);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Ingresar artículo";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTitleAlta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTitleAlta.Font = new System.Drawing.Font("Lucida Sans Unicode", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitleAlta.Location = new System.Drawing.Point(179, 21);
+            this.lblTitleAlta.Name = "lblTitleAlta";
+            this.lblTitleAlta.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.lblTitleAlta.Size = new System.Drawing.Size(292, 66);
+            this.lblTitleAlta.TabIndex = 0;
+            this.lblTitleAlta.Text = "Ingresar artículo";
+            this.lblTitleAlta.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblCodigo
             // 
@@ -140,7 +140,7 @@ namespace presentacion
             this.cboMarca.Location = new System.Drawing.Point(206, 280);
             this.cboMarca.Name = "cboMarca";
             this.cboMarca.Size = new System.Drawing.Size(121, 22);
-            this.cboMarca.TabIndex = 8;
+            this.cboMarca.TabIndex = 5;
             // 
             // cboCategoria
             // 
@@ -150,7 +150,7 @@ namespace presentacion
             this.cboCategoria.Location = new System.Drawing.Point(206, 320);
             this.cboCategoria.Name = "cboCategoria";
             this.cboCategoria.Size = new System.Drawing.Size(121, 22);
-            this.cboCategoria.TabIndex = 9;
+            this.cboCategoria.TabIndex = 6;
             // 
             // textCodigo
             // 
@@ -158,7 +158,7 @@ namespace presentacion
             this.textCodigo.Location = new System.Drawing.Point(206, 117);
             this.textCodigo.Name = "textCodigo";
             this.textCodigo.Size = new System.Drawing.Size(121, 20);
-            this.textCodigo.TabIndex = 10;
+            this.textCodigo.TabIndex = 1;
             // 
             // textUrl
             // 
@@ -166,7 +166,7 @@ namespace presentacion
             this.textUrl.Location = new System.Drawing.Point(207, 240);
             this.textUrl.Name = "textUrl";
             this.textUrl.Size = new System.Drawing.Size(121, 20);
-            this.textUrl.TabIndex = 11;
+            this.textUrl.TabIndex = 4;
             this.textUrl.Leave += new System.EventHandler(this.textUrl_Leave);
             // 
             // textDescripcion
@@ -175,7 +175,7 @@ namespace presentacion
             this.textDescripcion.Location = new System.Drawing.Point(206, 198);
             this.textDescripcion.Name = "textDescripcion";
             this.textDescripcion.Size = new System.Drawing.Size(121, 20);
-            this.textDescripcion.TabIndex = 12;
+            this.textDescripcion.TabIndex = 3;
             // 
             // textNombre
             // 
@@ -183,15 +183,15 @@ namespace presentacion
             this.textNombre.Location = new System.Drawing.Point(206, 158);
             this.textNombre.Name = "textNombre";
             this.textNombre.Size = new System.Drawing.Size(121, 20);
-            this.textNombre.TabIndex = 13;
+            this.textNombre.TabIndex = 2;
             // 
-            // cboPrecio
+            // textPrecio
             // 
-            this.cboPrecio.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.cboPrecio.Location = new System.Drawing.Point(206, 361);
-            this.cboPrecio.Name = "cboPrecio";
-            this.cboPrecio.Size = new System.Drawing.Size(121, 20);
-            this.cboPrecio.TabIndex = 14;
+            this.textPrecio.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.textPrecio.Location = new System.Drawing.Point(206, 361);
+            this.textPrecio.Name = "textPrecio";
+            this.textPrecio.Size = new System.Drawing.Size(121, 20);
+            this.textPrecio.TabIndex = 7;
             // 
             // btnAceptar
             // 
@@ -199,7 +199,7 @@ namespace presentacion
             this.btnAceptar.Location = new System.Drawing.Point(232, 441);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(96, 36);
-            this.btnAceptar.TabIndex = 15;
+            this.btnAceptar.TabIndex = 8;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -210,7 +210,7 @@ namespace presentacion
             this.button2.Location = new System.Drawing.Point(361, 441);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(98, 36);
-            this.button2.TabIndex = 16;
+            this.button2.TabIndex = 9;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -232,7 +232,7 @@ namespace presentacion
             this.Controls.Add(this.pboxArticulo);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.cboPrecio);
+            this.Controls.Add(this.textPrecio);
             this.Controls.Add(this.textNombre);
             this.Controls.Add(this.textDescripcion);
             this.Controls.Add(this.textUrl);
@@ -246,7 +246,7 @@ namespace presentacion
             this.Controls.Add(this.lblUrlImagen);
             this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.lblCodigo);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitleAlta);
             this.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAltaArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -260,7 +260,7 @@ namespace presentacion
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitleAlta;
         private System.Windows.Forms.Label lblCodigo;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.Label lblUrlImagen;
@@ -274,7 +274,7 @@ namespace presentacion
         private System.Windows.Forms.TextBox textUrl;
         private System.Windows.Forms.TextBox textDescripcion;
         private System.Windows.Forms.TextBox textNombre;
-        private System.Windows.Forms.TextBox cboPrecio;
+        private System.Windows.Forms.TextBox textPrecio;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pboxArticulo;

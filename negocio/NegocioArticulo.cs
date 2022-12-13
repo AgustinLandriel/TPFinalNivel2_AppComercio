@@ -23,7 +23,13 @@ namespace negocio
                 List<Articulo> listaArticulos = new List<Articulo>();
 
 
-                datos.setQuery("SELECT id,codigo,nombre,descripcion,imagenurl,precio from ARTICULOS");
+                datos.setQuery(@"select a.id,IdMarca,IdCategoria,a.codigo,a.nombre,a.descripcion,a.imagenurl,c.Descripcion as [Categoria],
+                                m.Descripcion as [Marca],a.precio
+                                from ARTICULOS as a
+                                inner join CATEGORIAS as c
+                                on(IdCategoria = c.Id)
+                                inner join MARCAS as m
+                                on(IdMarca = m.Id)");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -33,7 +39,14 @@ namespace negocio
                     aux.Codigo = (string)datos.Lector["codigo"];
                     aux.Nombre = (string)datos.Lector["nombre"];
                     aux.Descripcion = (string)datos.Lector["descripcion"];
-                    aux.UrlImagen = (string)datos.Lector["imagenurl"];
+                    aux.Marca = new Marca();
+                    aux.Marca.IdMarca = (int)datos.Lector["IdMarca"];
+                    aux.Marca.NombreMarca = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.NombreCategoria = (string)datos.Lector["Categoria"];
+                    if(!(datos.Lector["imagenurl"] is DBNull))
+                        aux.UrlImagen = (string)datos.Lector["imagenurl"];
                     aux.Precio = (decimal)datos.Lector["precio"];
 
                     listaArticulos.Add(aux);
@@ -142,6 +155,55 @@ namespace negocio
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void ModificarArticulo(Articulo articulo)
+        {
+            try
+            {
+                string consulta = "UPDATE ARTICULOS set codigo = @codigo,nombre = @nombre,descripcion=@descripcion,imagenurl = @imagenurl,precio=@precio,idMarca=@idMarca,idCategoria = @idCategoria WHERE id=@id";
+                datos.setParametros("@id", articulo.Id);
+                datos.setParametros("@codigo", articulo.Codigo);
+                datos.setParametros("@nombre", articulo.Nombre);
+                datos.setParametros("@descripcion", articulo.Descripcion);
+                datos.setParametros("@imagenurl", articulo.UrlImagen);
+                datos.setParametros("@precio", articulo.Precio);
+                datos.setParametros("@idMarca", articulo.Marca.IdMarca);
+                datos.setParametros("@idCategoria", articulo.Categoria.IdCategoria);
+                datos.setQuery(consulta);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public void EliminarArticulo (int id)
+        {
+            try
+            {
+                string consulta = "DELETE FROM ARTICULOS Where id = @id";
+                datos.setParametros("@id", id);
+                datos.setQuery(consulta);
+                datos.EjecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex ;
             }
             finally
             {
