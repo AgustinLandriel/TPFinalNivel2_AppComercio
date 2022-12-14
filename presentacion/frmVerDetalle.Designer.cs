@@ -118,7 +118,7 @@ namespace presentacion
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmVerDetalle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Detalle producto";
+            this.Text = "Detalle";
             this.Load += new System.EventHandler(this.frmVerDetalle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pboxDetalleImagen)).EndInit();
             this.ResumeLayout(false);

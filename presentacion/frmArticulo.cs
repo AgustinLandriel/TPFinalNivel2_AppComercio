@@ -178,6 +178,13 @@ namespace presentacion
 
             try
             {
+                OcultarLabelsObligatorios();
+
+                if (!validarCamposObligatorios())
+                {
+                    return;
+                }
+
                 string campo = cboxCampo.SelectedItem.ToString();
                 string criterio = cboxCriterio.SelectedItem.ToString();
                 string filtro = textFiltroAvanzado.Text;
@@ -196,6 +203,26 @@ namespace presentacion
            
         }
 
+        private bool validarCamposObligatorios()
+        {
+            if (cboxCampo.SelectedIndex == -1)
+            {
+                lblValidarCampo.Visible = true;
+                return false;
+            }
+            else if (cboxCriterio.SelectedIndex == -1)
+            {
+                lblValidarCriterio.Visible = true;
+                return false;
+            }
+            else if(string.IsNullOrEmpty(textFiltroAvanzado.Text))
+            {
+                lblValidarFiltro.Visible = true;
+                return false;
+            }
+
+            return true;
+        }
         private List<Articulo> BusquedaFiltrada(string campo, string criterio, string filtro)
         {
             List<Articulo> listaFiltrada = new List<Articulo>();
@@ -292,6 +319,25 @@ namespace presentacion
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmVerDetalle frmVerDetalle = new frmVerDetalle(seleccionado);
             frmVerDetalle.ShowDialog();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //Reestablezco los filtros y la grilla
+            cboxCampo.SelectedIndex = -1;
+            cboxCriterio.SelectedIndex = -1;
+            textFiltroAvanzado.Text = "";
+
+            OcultarLabelsObligatorios();
+
+            cargarArticulos();
+        }
+
+        private void OcultarLabelsObligatorios()
+        {
+            lblValidarCampo.Visible = false;
+            lblValidarCriterio.Visible = false;
+            lblValidarFiltro.Visible = false;
         }
     }
 }
