@@ -29,6 +29,7 @@ namespace presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmArticulo));
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.PictureBoxArticulo = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -49,9 +50,11 @@ namespace presentacion
             this.lblValidarCriterio = new System.Windows.Forms.Label();
             this.lblValidarFiltro = new System.Windows.Forms.Label();
             this.btnReestablecerFiltro = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxArticulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
@@ -74,10 +77,10 @@ namespace presentacion
             // 
             // PictureBoxArticulo
             // 
-            this.PictureBoxArticulo.Location = new System.Drawing.Point(719, 105);
+            this.PictureBoxArticulo.Location = new System.Drawing.Point(759, 92);
             this.PictureBoxArticulo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.PictureBoxArticulo.Name = "PictureBoxArticulo";
-            this.PictureBoxArticulo.Size = new System.Drawing.Size(309, 315);
+            this.PictureBoxArticulo.Size = new System.Drawing.Size(309, 347);
             this.PictureBoxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBoxArticulo.TabIndex = 1;
             this.PictureBoxArticulo.TabStop = false;
@@ -90,28 +93,28 @@ namespace presentacion
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(91, 32);
-            this.btnAgregar.TabIndex = 1;
+            this.btnAgregar.TabIndex = 13;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
             // 
+            this.btnModificar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Font = new System.Drawing.Font("Dubai", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.Location = new System.Drawing.Point(362, 496);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(93, 32);
-            this.btnModificar.TabIndex = 2;
+            this.btnModificar.TabIndex = 14;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.btnEliminar.FlatAppearance.BorderSize = 2;
+            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.Font = new System.Drawing.Font("Dubai", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -119,7 +122,7 @@ namespace presentacion
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(91, 32);
-            this.btnEliminar.TabIndex = 3;
+            this.btnEliminar.TabIndex = 15;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -128,24 +131,26 @@ namespace presentacion
             // 
             this.lblLista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblLista.Font = new System.Drawing.Font("Lucida Sans Unicode", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLista.Location = new System.Drawing.Point(12, 92);
+            this.lblLista.Location = new System.Drawing.Point(57, 104);
             this.lblLista.Name = "lblLista";
             this.lblLista.Padding = new System.Windows.Forms.Padding(12, 14, 12, 14);
             this.lblLista.Size = new System.Drawing.Size(286, 70);
-            this.lblLista.TabIndex = 4;
+            this.lblLista.TabIndex = 16;
             this.lblLista.Text = "Lista de articulos";
             // 
             // btnVerDetalle
             // 
+            this.btnVerDetalle.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnVerDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerDetalle.Font = new System.Drawing.Font("Dubai", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerDetalle.ForeColor = System.Drawing.Color.White;
             this.btnVerDetalle.Location = new System.Drawing.Point(130, 496);
             this.btnVerDetalle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnVerDetalle.Name = "btnVerDetalle";
             this.btnVerDetalle.Size = new System.Drawing.Size(103, 32);
-            this.btnVerDetalle.TabIndex = 5;
+            this.btnVerDetalle.TabIndex = 12;
             this.btnVerDetalle.Text = "Ver detalle";
-            this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.UseVisualStyleBackColor = false;
             this.btnVerDetalle.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblBuscar
@@ -155,7 +160,7 @@ namespace presentacion
             this.lblBuscar.Location = new System.Drawing.Point(411, 145);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(105, 17);
-            this.lblBuscar.TabIndex = 6;
+            this.lblBuscar.TabIndex = 1;
             this.lblBuscar.Text = "Busqueda rápida:";
             // 
             // textBuscar
@@ -165,7 +170,7 @@ namespace presentacion
             this.textBuscar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBuscar.Name = "textBuscar";
             this.textBuscar.Size = new System.Drawing.Size(151, 21);
-            this.textBuscar.TabIndex = 7;
+            this.textBuscar.TabIndex = 2;
             this.textBuscar.TextChanged += new System.EventHandler(this.textBuscar_TextChanged);
             // 
             // textFiltroAvanzado
@@ -174,7 +179,7 @@ namespace presentacion
             this.textFiltroAvanzado.Location = new System.Drawing.Point(451, 398);
             this.textFiltroAvanzado.Name = "textFiltroAvanzado";
             this.textFiltroAvanzado.Size = new System.Drawing.Size(127, 22);
-            this.textFiltroAvanzado.TabIndex = 11;
+            this.textFiltroAvanzado.TabIndex = 9;
             // 
             // cboxCampo
             // 
@@ -184,7 +189,7 @@ namespace presentacion
             this.cboxCampo.Location = new System.Drawing.Point(91, 395);
             this.cboxCampo.Name = "cboxCampo";
             this.cboxCampo.Size = new System.Drawing.Size(101, 25);
-            this.cboxCampo.TabIndex = 12;
+            this.cboxCampo.TabIndex = 5;
             this.cboxCampo.SelectedIndexChanged += new System.EventHandler(this.cboxCampo_SelectedIndexChanged);
             // 
             // cboxCriterio
@@ -196,7 +201,7 @@ namespace presentacion
             this.cboxCriterio.Location = new System.Drawing.Point(270, 395);
             this.cboxCriterio.Name = "cboxCriterio";
             this.cboxCriterio.Size = new System.Drawing.Size(107, 25);
-            this.cboxCriterio.TabIndex = 13;
+            this.cboxCriterio.TabIndex = 7;
             // 
             // lblCriterio
             // 
@@ -205,7 +210,7 @@ namespace presentacion
             this.lblCriterio.Location = new System.Drawing.Point(213, 403);
             this.lblCriterio.Name = "lblCriterio";
             this.lblCriterio.Size = new System.Drawing.Size(51, 17);
-            this.lblCriterio.TabIndex = 14;
+            this.lblCriterio.TabIndex = 6;
             this.lblCriterio.Text = "Criterio:";
             // 
             // lblFiltro
@@ -215,7 +220,7 @@ namespace presentacion
             this.lblFiltro.Location = new System.Drawing.Point(399, 403);
             this.lblFiltro.Name = "lblFiltro";
             this.lblFiltro.Size = new System.Drawing.Size(39, 17);
-            this.lblFiltro.TabIndex = 15;
+            this.lblFiltro.TabIndex = 8;
             this.lblFiltro.Text = "Filtro:";
             // 
             // lblCampo
@@ -225,7 +230,7 @@ namespace presentacion
             this.lblCampo.Location = new System.Drawing.Point(21, 402);
             this.lblCampo.Name = "lblCampo";
             this.lblCampo.Size = new System.Drawing.Size(64, 17);
-            this.lblCampo.TabIndex = 16;
+            this.lblCampo.TabIndex = 4;
             this.lblCampo.Text = "Filtrar por:";
             // 
             // btnBuscarFiltro
@@ -235,7 +240,7 @@ namespace presentacion
             this.btnBuscarFiltro.Location = new System.Drawing.Point(601, 392);
             this.btnBuscarFiltro.Name = "btnBuscarFiltro";
             this.btnBuscarFiltro.Size = new System.Drawing.Size(86, 29);
-            this.btnBuscarFiltro.TabIndex = 17;
+            this.btnBuscarFiltro.TabIndex = 10;
             this.btnBuscarFiltro.Text = "Buscar";
             this.btnBuscarFiltro.UseVisualStyleBackColor = true;
             this.btnBuscarFiltro.Click += new System.EventHandler(this.textBuscarFiltro_Click);
@@ -283,29 +288,41 @@ namespace presentacion
             this.btnReestablecerFiltro.Location = new System.Drawing.Point(581, 437);
             this.btnReestablecerFiltro.Name = "btnReestablecerFiltro";
             this.btnReestablecerFiltro.Size = new System.Drawing.Size(133, 29);
-            this.btnReestablecerFiltro.TabIndex = 21;
+            this.btnReestablecerFiltro.TabIndex = 11;
             this.btnReestablecerFiltro.Text = "Reestablecer filtro";
             this.btnReestablecerFiltro.UseVisualStyleBackColor = true;
             this.btnReestablecerFiltro.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // button2
+            // btnActualizar
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(27, 344);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 25);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Actualizar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnActualizar.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnActualizar.FlatAppearance.BorderSize = 0;
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizar.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
+            this.btnActualizar.Location = new System.Drawing.Point(33, 344);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(33, 32);
+            this.btnActualizar.TabIndex = 3;
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(33, 120);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 32);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
             // 
             // frmArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 565);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(1096, 565);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnReestablecerFiltro);
             this.Controls.Add(this.lblValidarFiltro);
             this.Controls.Add(this.lblValidarCriterio);
@@ -335,6 +352,7 @@ namespace presentacion
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxArticulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,7 +380,8 @@ namespace presentacion
         private System.Windows.Forms.Label lblValidarCriterio;
         private System.Windows.Forms.Label lblValidarFiltro;
         private System.Windows.Forms.Button btnReestablecerFiltro;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

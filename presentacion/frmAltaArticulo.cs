@@ -47,6 +47,29 @@ namespace presentacion
                 if (articulo == null)
                     articulo = new Articulo();
 
+                //Oculto los labels obligatorios
+                OcultarLabelsObligatorios();
+
+                //Validar campos nulos o vacios
+                if (!validarCamposObligatorios())
+                {
+                    return;
+                }
+
+                //Validar campo nombre
+                if (!ValidarString(textNombre.Text))
+                {
+                    MessageBox.Show("El campo Nombre no puede tener numeros.");
+                    return;
+                }
+
+                //Validar Campo Precio
+                if (ValidarString(textPrecio.Text))
+                {
+                    MessageBox.Show("El campo Precio solo acepta decimal.");
+                    return;
+                }
+
                 articulo.Codigo = textCodigo.Text;
                 articulo.Nombre = textNombre.Text;
                 articulo.Descripcion = textDescripcion.Text;
@@ -55,7 +78,8 @@ namespace presentacion
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Precio = decimal.Parse(textPrecio.Text);
 
-                if (articulo.Id != 0)
+
+                if (articulo.Id != 0) //Si el ID es distinto a 0 es porque ya existe el articulo
                 {
                    negocio.ModificarArticulo(articulo);
                     MessageBox.Show(articulo.Nombre + " ha sido modificado correctamente.");
@@ -137,5 +161,52 @@ namespace presentacion
                 pboxArticulo.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
             }
         }
+
+        private bool ValidarString(string cadena)
+        {
+            foreach (var item in cadena)
+            {
+                if (!char.IsLetter(item))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool validarCamposObligatorios()
+        {
+            if (string.IsNullOrEmpty(textCodigo.Text))
+            {
+                lblCompletarCod.Visible = true;
+                return false;
+            }
+            else if (string.IsNullOrEmpty(textNombre.Text))
+            {
+                lblCompletarNombre.Visible = true;
+                return false;
+            }
+            else if (string.IsNullOrEmpty(textDescripcion.Text))
+            {
+                lblCompletarDesc.Visible = true;
+                return false;
+            }
+            else if (string.IsNullOrEmpty(textPrecio.Text)) {
+                lblCompletarPrecio.Visible = true;
+                return false;
+            }
+
+            return true;
+        }
+
+        private void OcultarLabelsObligatorios()
+        {
+            lblCompletarCod.Visible = false;
+            lblCompletarNombre.Visible = false;
+            lblCompletarDesc.Visible = false;
+            lblCompletarPrecio.Visible = false;
+        }
+
     }
 }

@@ -52,9 +52,7 @@ namespace presentacion
                 listaArticulo = negocioArticulo.mostrarArticulos();
                 dgvArticulos.DataSource = listaArticulo;
                 ocultarColumnas();
-                
-
-                PictureBoxArticulo.Load(listaArticulo[0].UrlImagen);
+                PictureBoxArticulo.Load(listaArticulo[0].UrlImagen); 
             }
             catch (Exception ex)
             {
@@ -81,11 +79,22 @@ namespace presentacion
         }
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
+           
+
             //Si la grilla tiene datos, selecciona el articulo.
-            if (dgvArticulos.DataSource != null)
+            if (dgvArticulos.CurrentRow != null)
             {
-                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.UrlImagen);
+                try
+                {
+                  Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                  cargarImagen(seleccionado.UrlImagen);
+
+                }
+                catch (NullReferenceException ex)
+                {
+
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
 
@@ -203,7 +212,7 @@ namespace presentacion
                 //Valido para Marca y Nombre que solo acepte string
                 if (ValidarNumero() && (cboxCampo.SelectedItem == "Marca" || cboxCampo.SelectedItem == "Nombre"))
                 {
-                    MessageBox.Show("No se aceptan numeros\nIngrese un nombre o categoria para filtrar.");
+                    MessageBox.Show("No se aceptan numeros\n\nIngrese un Nombre o Marca para filtrar.");
                     return;
                 }
 
@@ -366,6 +375,7 @@ namespace presentacion
             textFiltroAvanzado.Text = "";
             textFiltroAvanzado.Enabled = false;
             OcultarLabelsObligatorios();
+            cargarArticulos();
         }
 
         private void OcultarLabelsObligatorios()
@@ -377,8 +387,8 @@ namespace presentacion
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            cargarArticulos();
+
+            textBuscar.Text = ""; //Pongo el texto de busqueda rapida en vacio asi me devuelve toda la lista.
         }
     }
 }

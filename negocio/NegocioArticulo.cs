@@ -35,18 +35,29 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+
                     aux.Id = (int)datos.Lector["id"];
+
+                    if (!(datos.Lector["codigo"] is DBNull))
                     aux.Codigo = (string)datos.Lector["codigo"];
-                    aux.Nombre = (string)datos.Lector["nombre"];
+                    
+                    if (!(datos.Lector["nombre"] is DBNull))
+                     aux.Nombre = (string)datos.Lector["nombre"];
+                    
+                    if (!(datos.Lector["descripcion"] is DBNull))
                     aux.Descripcion = (string)datos.Lector["descripcion"];
+
                     aux.Marca = new Marca();
                     aux.Marca.IdMarca = (int)datos.Lector["IdMarca"];
                     aux.Marca.NombreMarca = (string)datos.Lector["Marca"];
                     aux.Categoria = new Categoria();
                     aux.Categoria.IdCategoria = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.NombreCategoria = (string)datos.Lector["Categoria"];
-                    if(!(datos.Lector["imagenurl"] is DBNull))
-                        aux.UrlImagen = (string)datos.Lector["imagenurl"];
+
+                    if(!(datos.Lector["imagenurl"] is DBNull))          //Si un campo de la BD ES nulo, no lo trae. Si NO lo es, lo trae.
+                     aux.UrlImagen = (string)datos.Lector["imagenurl"];
+
+                    if (!(datos.Lector["precio"] is DBNull))
                     aux.Precio = (decimal)datos.Lector["precio"];
 
                     listaArticulos.Add(aux);
