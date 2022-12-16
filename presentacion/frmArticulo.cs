@@ -151,6 +151,8 @@ namespace presentacion
         {
             if(cboxCampo.SelectedItem == "Precio")
             {
+                textFiltroAvanzado.Enabled = true;
+                cboxCriterio.Enabled = true;
                 cboxCriterio.Items.Clear();
                 cboxCriterio.Items.Add("Mayor a");
                 cboxCriterio.Items.Add("Menor a");
@@ -158,6 +160,8 @@ namespace presentacion
 
             } else if(cboxCampo.SelectedItem == "Marca")
             {
+                cboxCriterio.Enabled = true;
+                textFiltroAvanzado.Enabled = true;
                 cboxCriterio.Items.Clear();
                 cboxCriterio.Items.Add("Coincide con");
                 cboxCriterio.Items.Add("Empieza con");
@@ -165,6 +169,8 @@ namespace presentacion
             }
             else
             {
+                cboxCriterio.Enabled = true;
+                textFiltroAvanzado.Enabled = true;
                 cboxCriterio.Items.Clear();
                 cboxCriterio.Items.Add("Coincide con");
                 cboxCriterio.Items.Add("Empieza con");
@@ -178,10 +184,26 @@ namespace presentacion
 
             try
             {
+                //Oculto los labels obligatorios para el usuario
                 OcultarLabelsObligatorios();
 
+                //Valido que cada campo este seleccionado 
                 if (!validarCamposObligatorios())
                 {
+                    return;
+                }
+
+                //Valido que cuando se elija Precio, acepte SOLO numeros
+                if(!ValidarNumero() && cboxCampo.SelectedItem == "Precio")
+                {
+                    MessageBox.Show("Ingrese un número para filtrar");
+                    return;
+                }
+
+                //Valido para Marca y Nombre que solo acepte string
+                if (ValidarNumero() && (cboxCampo.SelectedItem == "Marca" || cboxCampo.SelectedItem == "Nombre"))
+                {
+                    MessageBox.Show("No se aceptan numeros\nIngrese un nombre o categoria para filtrar.");
                     return;
                 }
 
@@ -219,6 +241,19 @@ namespace presentacion
             {
                 lblValidarFiltro.Visible = true;
                 return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidarNumero()
+        {
+            foreach (var item in textFiltroAvanzado.Text)
+            {
+                if (!char.IsDigit(item))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -326,11 +361,11 @@ namespace presentacion
             //Reestablezco los filtros y la grilla
             cboxCampo.SelectedIndex = -1;
             cboxCriterio.SelectedIndex = -1;
+            cboxCriterio.Items.Clear();
+            cboxCriterio.Enabled = false;
             textFiltroAvanzado.Text = "";
-
+            textFiltroAvanzado.Enabled = false;
             OcultarLabelsObligatorios();
-
-            cargarArticulos();
         }
 
         private void OcultarLabelsObligatorios()
@@ -338,6 +373,12 @@ namespace presentacion
             lblValidarCampo.Visible = false;
             lblValidarCriterio.Visible = false;
             lblValidarFiltro.Visible = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            cargarArticulos();
         }
     }
 }

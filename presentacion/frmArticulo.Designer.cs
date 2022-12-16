@@ -48,14 +48,20 @@ namespace presentacion
             this.lblValidarCampo = new System.Windows.Forms.Label();
             this.lblValidarCriterio = new System.Windows.Forms.Label();
             this.lblValidarFiltro = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnReestablecerFiltro = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
             // 
+            this.dgvArticulos.AllowUserToAddRows = false;
+            this.dgvArticulos.AllowUserToDeleteRows = false;
+            this.dgvArticulos.AllowUserToResizeColumns = false;
+            this.dgvArticulos.AllowUserToResizeRows = false;
             this.dgvArticulos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvArticulos.Location = new System.Drawing.Point(27, 178);
             this.dgvArticulos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -164,6 +170,7 @@ namespace presentacion
             // 
             // textFiltroAvanzado
             // 
+            this.textFiltroAvanzado.Enabled = false;
             this.textFiltroAvanzado.Location = new System.Drawing.Point(451, 398);
             this.textFiltroAvanzado.Name = "textFiltroAvanzado";
             this.textFiltroAvanzado.Size = new System.Drawing.Size(127, 22);
@@ -183,6 +190,7 @@ namespace presentacion
             // cboxCriterio
             // 
             this.cboxCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCriterio.Enabled = false;
             this.cboxCriterio.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxCriterio.FormattingEnabled = true;
             this.cboxCriterio.Location = new System.Drawing.Point(270, 395);
@@ -268,24 +276,37 @@ namespace presentacion
             this.lblValidarFiltro.Text = "* Ingrese filtro";
             this.lblValidarFiltro.Visible = false;
             // 
-            // button1
+            // btnReestablecerFiltro
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(581, 437);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 29);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Reestablecer filtro";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnReestablecerFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReestablecerFiltro.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReestablecerFiltro.Location = new System.Drawing.Point(581, 437);
+            this.btnReestablecerFiltro.Name = "btnReestablecerFiltro";
+            this.btnReestablecerFiltro.Size = new System.Drawing.Size(133, 29);
+            this.btnReestablecerFiltro.TabIndex = 21;
+            this.btnReestablecerFiltro.Text = "Reestablecer filtro";
+            this.btnReestablecerFiltro.UseVisualStyleBackColor = true;
+            this.btnReestablecerFiltro.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(27, 344);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(84, 25);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "Actualizar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // frmArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 565);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnReestablecerFiltro);
             this.Controls.Add(this.lblValidarFiltro);
             this.Controls.Add(this.lblValidarCriterio);
             this.Controls.Add(this.lblValidarCampo);
@@ -340,7 +361,8 @@ namespace presentacion
         private System.Windows.Forms.Label lblValidarCampo;
         private System.Windows.Forms.Label lblValidarCriterio;
         private System.Windows.Forms.Label lblValidarFiltro;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReestablecerFiltro;
+        private System.Windows.Forms.Button button2;
     }
 }
 
