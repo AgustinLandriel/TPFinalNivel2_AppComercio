@@ -56,13 +56,6 @@ namespace presentacion
                     return;
                 }
 
-                //Validar campo nombre
-                if (!ValidarString(textNombre.Text))
-                {
-                    MessageBox.Show("El campo Nombre no puede tener numeros.");
-                    return;
-                }
-
                 //Validar Campo Precio
                 if (ValidarString(textPrecio.Text))
                 {
@@ -208,5 +201,18 @@ namespace presentacion
             lblCompletarPrecio.Visible = false;
         }
 
+        private void btnSubirImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog archivo = new OpenFileDialog();
+
+            archivo.Filter = "jpg|*.jpg|png|*.png";
+
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                textUrl.Text = archivo.FileName;
+                cargarImagen(textUrl.Text);
+                MessageBox.Show("Agregado correctamente!");
+            }
+        }
     }
 }

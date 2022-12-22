@@ -29,6 +29,7 @@ namespace presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAltaArticulo));
             this.lblTitleAlta = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.lblPrecio = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace presentacion
             this.lblCompletarDesc = new System.Windows.Forms.Label();
             this.lblCompletarNombre = new System.Windows.Forms.Label();
             this.lblCompletarPrecio = new System.Windows.Forms.Label();
+            this.btnSubirImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pboxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,11 +99,11 @@ namespace presentacion
             // 
             this.lblUrlImagen.AutoSize = true;
             this.lblUrlImagen.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUrlImagen.Location = new System.Drawing.Point(110, 240);
+            this.lblUrlImagen.Location = new System.Drawing.Point(135, 240);
             this.lblUrlImagen.Name = "lblUrlImagen";
-            this.lblUrlImagen.Size = new System.Drawing.Size(86, 20);
+            this.lblUrlImagen.Size = new System.Drawing.Size(61, 20);
             this.lblUrlImagen.TabIndex = 14;
-            this.lblUrlImagen.Text = "URL imágen:";
+            this.lblUrlImagen.Text = " Imágen:";
             // 
             // lblDescripción
             // 
@@ -228,7 +230,7 @@ namespace presentacion
             // 
             // pboxArticulo
             // 
-            this.pboxArticulo.Location = new System.Drawing.Point(444, 107);
+            this.pboxArticulo.Location = new System.Drawing.Point(495, 96);
             this.pboxArticulo.Name = "pboxArticulo";
             this.pboxArticulo.Size = new System.Drawing.Size(227, 266);
             this.pboxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -354,11 +356,26 @@ namespace presentacion
             this.lblCompletarPrecio.Text = "Completar";
             this.lblCompletarPrecio.Visible = false;
             // 
+            // btnSubirImagen
+            // 
+            this.btnSubirImagen.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSubirImagen.FlatAppearance.BorderSize = 0;
+            this.btnSubirImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubirImagen.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubirImagen.Image = ((System.Drawing.Image)(resources.GetObject("btnSubirImagen.Image")));
+            this.btnSubirImagen.Location = new System.Drawing.Point(334, 235);
+            this.btnSubirImagen.Name = "btnSubirImagen";
+            this.btnSubirImagen.Size = new System.Drawing.Size(42, 35);
+            this.btnSubirImagen.TabIndex = 31;
+            this.btnSubirImagen.UseVisualStyleBackColor = false;
+            this.btnSubirImagen.Click += new System.EventHandler(this.btnSubirImagen_Click);
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 501);
+            this.ClientSize = new System.Drawing.Size(784, 504);
+            this.Controls.Add(this.btnSubirImagen);
             this.Controls.Add(this.lblCompletarPrecio);
             this.Controls.Add(this.lblCompletarNombre);
             this.Controls.Add(this.lblCompletarDesc);
@@ -430,5 +447,6 @@ namespace presentacion
         private System.Windows.Forms.Label lblCompletarDesc;
         private System.Windows.Forms.Label lblCompletarNombre;
         private System.Windows.Forms.Label lblCompletarPrecio;
+        private System.Windows.Forms.Button btnSubirImagen;
     }
 }

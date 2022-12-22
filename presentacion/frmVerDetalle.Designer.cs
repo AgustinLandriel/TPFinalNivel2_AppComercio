@@ -55,7 +55,7 @@ namespace presentacion
             this.lblDetalleNombre.AutoSize = true;
             this.lblDetalleNombre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDetalleNombre.Font = new System.Drawing.Font("Segoe UI Emoji", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetalleNombre.Location = new System.Drawing.Point(130, 113);
+            this.lblDetalleNombre.Location = new System.Drawing.Point(293, 106);
             this.lblDetalleNombre.Name = "lblDetalleNombre";
             this.lblDetalleNombre.Size = new System.Drawing.Size(74, 21);
             this.lblDetalleNombre.TabIndex = 3;
@@ -66,7 +66,7 @@ namespace presentacion
             this.lblDetalleDescripcion.AutoSize = true;
             this.lblDetalleDescripcion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDetalleDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetalleDescripcion.Location = new System.Drawing.Point(130, 190);
+            this.lblDetalleDescripcion.Location = new System.Drawing.Point(293, 183);
             this.lblDetalleDescripcion.Name = "lblDetalleDescripcion";
             this.lblDetalleDescripcion.Size = new System.Drawing.Size(92, 20);
             this.lblDetalleDescripcion.TabIndex = 4;
@@ -77,7 +77,7 @@ namespace presentacion
             this.lblDetalleMarca.AutoSize = true;
             this.lblDetalleMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDetalleMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetalleMarca.Location = new System.Drawing.Point(130, 153);
+            this.lblDetalleMarca.Location = new System.Drawing.Point(293, 146);
             this.lblDetalleMarca.Name = "lblDetalleMarca";
             this.lblDetalleMarca.Size = new System.Drawing.Size(53, 20);
             this.lblDetalleMarca.TabIndex = 5;
@@ -88,7 +88,7 @@ namespace presentacion
             this.lblDetallePrecio.AutoSize = true;
             this.lblDetallePrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDetallePrecio.Font = new System.Drawing.Font("Segoe UI Emoji", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetallePrecio.Location = new System.Drawing.Point(130, 228);
+            this.lblDetallePrecio.Location = new System.Drawing.Point(293, 221);
             this.lblDetallePrecio.Name = "lblDetallePrecio";
             this.lblDetallePrecio.Size = new System.Drawing.Size(59, 21);
             this.lblDetallePrecio.TabIndex = 6;
@@ -96,9 +96,9 @@ namespace presentacion
             // 
             // pboxDetalleImagen
             // 
-            this.pboxDetalleImagen.Location = new System.Drawing.Point(325, 91);
+            this.pboxDetalleImagen.Location = new System.Drawing.Point(53, 95);
             this.pboxDetalleImagen.Name = "pboxDetalleImagen";
-            this.pboxDetalleImagen.Size = new System.Drawing.Size(183, 188);
+            this.pboxDetalleImagen.Size = new System.Drawing.Size(183, 206);
             this.pboxDetalleImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboxDetalleImagen.TabIndex = 7;
             this.pboxDetalleImagen.TabStop = false;
@@ -107,8 +107,8 @@ namespace presentacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(592, 306);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(608, 323);
             this.Controls.Add(this.pboxDetalleImagen);
             this.Controls.Add(this.lblDetallePrecio);
             this.Controls.Add(this.lblDetalleMarca);
